@@ -1,0 +1,39 @@
+{
+  "name": "04-nodepop-keepcoding",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cross-env nodemon --env-file=.env bin/www",
+    "start": "cross-env NODE_ENV=production node --env-file=.env bin/www",
+    "seed": "node --env-file=.env seedDB.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexAlgarate/Nodepop-KeepCoding.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexAlgarate/Nodepop-KeepCoding/issues"
+  },
+  "homepage": "https://github.com/AlexAlgarate/Nodepop-KeepCoding#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "connect-mongo": "^5.1.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "express-validator": "^7.3.0",
+    "mongodb": "^6.20.0",
+    "mongoose": "^8.19.2",
+    "morgan": "^1.10.1"
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0",
+    "nodemon": "^3.1.10"
+  }
+}
