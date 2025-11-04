@@ -14,8 +14,8 @@ const userSchema = new Schema({
   },
 });
 
-userSchema.statics.hashPassword = (clearPassword, salt) => {
-  return hash(clearPassword, salt);
+userSchema.statics.hashPassword = (clearPassword) => {
+  return hash(clearPassword, 10);
 };
 
 userSchema.methods.comparePassword = function (plainPassword) {
