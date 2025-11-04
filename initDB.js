@@ -47,7 +47,13 @@ async function seedProducts() {
 
   const PRODUCTS = [
     { name: 'mobile phone', owner: user1._id, price: 250, productTags: ['mobile,'] },
-    { name: 'bicycle', owner: user2._id, price: 2500, productTags: ['lifestyle,'] },
+    {
+      name: 'running shoes',
+      owner: user1._id,
+      price: 350,
+      productTags: ['lifestyle', 'work'],
+    },
+    { name: 'bicycle', owner: user2._id, price: 2500, productTags: ['lifestyle'] },
     {
       name: 'laptop',
       owner: admin._id,
