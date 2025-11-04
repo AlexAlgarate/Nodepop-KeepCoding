@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cross-env nodemon --env-file=.env bin/www",
     "start": "cross-env NODE_ENV=production node --env-file=.env bin/www",
-    "seed": "node --env-file=.env seedDB.js"
+    "seed": "node --env-file=.env initDB.js"
   },
   "repository": {
     "type": "git",
