@@ -4,6 +4,10 @@ import morgan from 'morgan';
 
 import { router as apiRouter } from './routes/apiRoutes.js';
 import { connectMongoose } from './lib/connectMongoose.js';
+import {
+  notFoundErrorHandler,
+  serverErrorHandler,
+} from './lib/middleware/erromiddleware.js';
 const app = express();
 
 // Mongoose connection
@@ -22,5 +26,9 @@ app.engine('html', renderFile);
 app.set('views', './views');
 
 app.use('/api', apiRouter);
+
+// Error handlers
+app.use(serverErrorHandler);
+app.use(notFoundErrorHandler);
 
 export default app;
