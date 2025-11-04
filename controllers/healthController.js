@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 
-import { formatTime } from '../utils/dateutils.js';
+import { formatTime } from '../utils/dateUtils.js';
 
 const packageJson = JSON.parse(
   readFileSync(new URL('../package.json', import.meta.url), 'utf8')
