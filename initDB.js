@@ -21,23 +21,33 @@ await seedProducts();
 await connection.close();
 process.exit(0);
 
+async function deleteCollection(Model, modelName) {
+  const deletedCollection = await Model.deleteMany();
+  console.log(`Deleted ${deletedCollection.deletedCount} ${modelName}`);
+}
+
+async function insertCollection(Model, items, modelName) {
+  const insertedCollection = await Model.insertMany(items);
+  console.log(`Inserted ${insertedCollection.length} ${modelName}`);
+}
+
 async function seedUsers() {
   const USERS = [
-    { email: 'user_one@example.com', password: await User.hashPassword('1234') },
-    { email: 'user_two@example.com', password: await User.hashPassword('1234') },
-    { email: 'admin@example.com', password: await User.hashPassword('1234') },
+    { email: 'user_one@example.com' },
+    { email: 'user_two@example.com' },
+    { email: 'admin@example.com' },
   ];
 
-  const deletedResult = await User.deleteMany();
-  console.log(`Deleted ${deletedResult.deletedCount} Users`);
+  for (const user of USERS) {
+    user.password = await User.hashPassword('1234');
+  }
 
-  const insertResult = await User.insertMany(USERS);
-  console.log(`Inserted ${insertResult.length} Users`);
+  await deleteCollection(User, 'Users');
+  await insertCollection(User, USERS, 'Users');
 }
 
 async function seedProducts() {
-  const deletedResult = await Product.deleteMany();
-  console.log(`Deleted ${deletedResult.deletedCount} Products`);
+  await deleteCollection(Product, 'Products');
 
   const [user1, user2, admin] = await Promise.all([
     User.findOne({ email: 'user_one@example.com' }),
@@ -62,6 +72,5 @@ async function seedProducts() {
     },
   ];
 
-  const insertResult = await Product.insertMany(PRODUCTS);
-  console.log(`Inserted ${insertResult.length} Products`);
+  await insertCollection(Product, PRODUCTS, 'Products');
 }
