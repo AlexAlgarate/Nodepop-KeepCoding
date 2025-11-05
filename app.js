@@ -1,9 +1,11 @@
 import express from 'express';
 import { renderFile } from 'ejs';
 import morgan from 'morgan';
+import { connectMongoose } from './lib/connectMongoose.js';
 
 import { router as apiRouter } from './routes/apiRoutes.js';
-import { connectMongoose } from './lib/connectMongoose.js';
+import { router as webRouter } from './routes/webRoutes.js';
+
 import {
   notFoundErrorHandler,
   serverErrorHandler,
@@ -27,7 +29,9 @@ app.set('view engine', 'ejs');
 app.engine('html', renderFile);
 app.set('views', './views');
 
+// routers
 app.use('/api', apiRouter);
+app.use('/', webRouter);
 
 // Auth Middleware
 app.use(sessionMiddleware);
