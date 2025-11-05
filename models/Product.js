@@ -1,18 +1,18 @@
 import { Schema, model } from 'mongoose';
+import { User } from './User.js';
 
 const productSchema = new Schema({
   name: {
     type: String,
-    index: true,
   },
   owner: {
     type: Schema.Types.ObjectId,
     ref: 'User',
+    index: true,
   },
   price: {
     type: Number,
     min: 0,
-    index: true,
   },
   productTag: {
     type: [String],
