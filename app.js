@@ -7,7 +7,9 @@ import { connectMongoose } from './lib/connectMongoose.js';
 import {
   notFoundErrorHandler,
   serverErrorHandler,
-} from './lib/middleware/erromiddleware.js';
+} from './lib/middleware/errorMiddleware.js';
+import { sessionInViews, sessionMiddleware } from './lib/middleware/authMiddleware.js';
+
 const app = express();
 
 // Mongoose connection
@@ -26,6 +28,10 @@ app.engine('html', renderFile);
 app.set('views', './views');
 
 app.use('/api', apiRouter);
+
+// Auth Middleware
+app.use(sessionMiddleware);
+app.use(sessionInViews);
 
 // Error handlers
 app.use(serverErrorHandler);
