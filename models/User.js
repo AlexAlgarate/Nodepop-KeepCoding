@@ -22,4 +22,4 @@ userSchema.methods.comparePassword = function (plainPassword) {
   return compare(plainPassword, this.password);
 };
 
-export const User = model('UserProduct', userSchema);
+export const User = model('User', userSchema);

@@ -7,14 +7,14 @@ const productSchema = new Schema({
   },
   owner: {
     type: Schema.Types.ObjectId,
-    ref: 'UserProduct',
+    ref: 'User',
   },
   price: {
     type: Number,
     min: 0,
     index: true,
   },
-  productTags: {
+  productTag: {
     type: [String],
     index: true,
   },
