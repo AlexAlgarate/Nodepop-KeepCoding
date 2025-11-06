@@ -12,13 +12,13 @@ export const loginController = {
         email: req.body.email,
       }).select('+password');
 
-      if (!user || !(await User.comparePassword(req.body.password))) {
+      if (!user || !(await user.comparePassword(req.body.password))) {
         res.locals.email = req.body.email;
-        res.locals.errors = 'Invalid Credentials';
+        res.locals.errors = 'Invalid credentials';
         return !res.render('login.html');
       }
 
-      res.session.userId = user.id;
+      req.session.userId = user.id;
 
       res.redirect(req.query.redir || '/');
     } catch (error) {
@@ -26,9 +26,9 @@ export const loginController = {
     }
   },
   logOut: (req, res, next) => {
-    req.session.regenerate((err) => {
-      if (err) {
-        return next(err);
+    req.session.regenerate((error) => {
+      if (error) {
+        return next(error);
       }
       res.redirect('/');
     });
