@@ -29,13 +29,19 @@ app.set('view engine', 'ejs');
 app.engine('html', renderFile);
 app.set('views', './views');
 
-// routers
-app.use('/api', apiRouter);
-app.use('/', webRouter);
+app.use((req, res, next) => {
+  res.locals.env = process.env.NODE_ENV;
+  res.locals.appName = 'NodeApi KC 19';
+  next();
+});
+
 
 // Auth Middleware
 app.use(sessionMiddleware);
 app.use(sessionInViews);
+// routers
+app.use('/api', apiRouter);
+app.use('/', webRouter);
 
 // Error handlers
 app.use(serverErrorHandler);
