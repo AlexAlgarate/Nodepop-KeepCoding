@@ -12,6 +12,8 @@ import {
 } from './lib/middleware/errorMiddleware.js';
 import { sessionInViews, sessionMiddleware } from './lib/middleware/authMiddleware.js';
 
+const APP_NAME = 'Práctica KC Node';
+
 const app = express();
 
 // Mongoose connection
@@ -31,14 +33,14 @@ app.set('views', './views');
 
 app.use((req, res, next) => {
   res.locals.env = process.env.NODE_ENV;
-  res.locals.appName = 'NodeApi KC 19';
+  res.locals.appName = APP_NAME;
   next();
 });
-
 
 // Auth Middleware
 app.use(sessionMiddleware);
 app.use(sessionInViews);
+
 // routers
 app.use('/api', apiRouter);
 app.use('/', webRouter);
