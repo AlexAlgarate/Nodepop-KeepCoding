@@ -1,18 +1,19 @@
 <%- include('_header.html') %>
 
-<div class="container">
-  <h1>Hola Mundo</h1>
 
-  <p><%= userId %></p>
-</div>
 
 <div class="container mt-4">
-  <h2>Productos</h2>
+  <h2>Products</h2>
   <div class="row">
     <% for (let i = 0; i < products.length; i++) { %>
     <div class="col">
       <div class="card" style="width: 18rem; margin-bottom: 1rem">
-        <div class="card-body"><%= products[i].name %> - <%= products[i].price %> - <%= products[i].productTag %></div>
+        <div class="card-body" style="display:flex; flex-direction: column;margin:1rem">
+          <div><%= `Product: ${products[i].name}` %></div>
+          <div><%= `Price: ${products[i].price}€` %></div>
+          <div><%= `Category: ${products[i].productTag}` %></div>
+
+        </div>
       </div>
     </div>
     <% } %>
