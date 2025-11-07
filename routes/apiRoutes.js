@@ -2,7 +2,7 @@ import express from 'express';
 import { param, query } from 'express-validator';
 
 import { healthCall } from '../controllers/healthController.js';
-import { productController } from '../controllers/productController.js';
+import { productController } from '../controllers/productAPIController.js';
 
 export const router = express.Router();
 
