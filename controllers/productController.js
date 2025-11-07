@@ -22,7 +22,6 @@ export const productController = {
 
     if (data.tag) {
       const tags = data.tag.split(',').map((tag) => tag.trim());
-      console.log('tags _> ', tags);
       filter.productTag = { $all: tags };
     }
 
@@ -52,14 +51,23 @@ export const productController = {
       });
     }
   },
-  addProduct: async (req, res, next) => {
-    const product = await Product({
-      name: req.body.name,
-      owner: req.body.owner,
-      price: req.body.price,
-      productTag: req.body.productTag,
-    });
+  addProduct: async (req, res) => {
+    const result = validationResult(req);
+    if (!result.isEmpty()) {
+      return res.status(400).json({ errors: result.array() });
+    }
+
     try {
+      const { name, owner, price, productTag } = req.body;
+      const product = new Product({
+        name,
+        owner,
+        price,
+        productTag: Array.isArray(productTag)
+          ? productTag.map((tag) => tag.trim())
+          : productTag.split(',').map((tag) => tag.trim()),
+      });
+
       const savedProduct = await product.save();
       res.status(201).json(savedProduct);
     } catch (error) {
@@ -70,9 +78,25 @@ export const productController = {
       } else {
         res.status(500).json({
           message: 'Internal Server Error',
+          error: error.message,
         });
       }
     }
   },
-  removeProduct: async (req, res, next) => {},
+  removeProduct: async (req, res, next) => {
+    try {
+      const productId = req.params.id;
+
+      const result = await Product.deleteOne({ _id: productId });
+
+      if (result.deletedCount === 0) {
+        return res.status(404).json({
+          error: 'Product not found',
+        });
+      }
+      res.status(200).json({ message: 'Product deleted succesfully' });
+    } catch (error) {
+      next(error);
+    }
+  },
 };
