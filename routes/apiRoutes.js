@@ -1,5 +1,5 @@
 import express from 'express';
-import { query } from 'express-validator';
+import { param, query } from 'express-validator';
 
 import { healthCall } from '../controllers/healthController.js';
 import { productController } from '../controllers/productController.js';
@@ -25,35 +25,26 @@ router.get(
       min: 1,
     })
     .toInt(),
-  query('owner', 'Owner must be an ObjectId of Mongoose')
-    .optional()
-    .isMongoId()    
-    ,
-  query('name', 'Name must be a string')
-    .optional()
-    .isString()
-    .trim()
-  ,
+  query('owner', 'Owner must be an ObjectId of Mongoose').optional().isMongoId(),
+  query('name', 'Name must be a string').optional().isString().trim(),
   query('priceMin', 'priceMin must be a positive number')
     .optional()
     .isInt({
-      min: 0
+      min: 0,
     })
-    .toInt()
-  ,
+    .toInt(),
   query('priceMax', 'priceMax must be a positive number')
     .optional()
     .isInt({
-      min: 0
+      min: 0,
     })
-    .toInt()
-  ,
-  query('tag', 'Tag must be a string')
-    .optional()
-    .isString()
-    .trim()
-  ,
+    .toInt(),
+  query('tag', 'Tag must be a string').optional().isString().trim(),
   productController.getAllProducts
 );
 router.post('/products', productController.addProduct);
-router.delete('/products/:id', productController.removeProduct);
+router.delete(
+  '/products/:id',
+  param('id', 'ID must be a MongoDB ObjectId').isMongoId(),
+  productController.removeProduct
+);
