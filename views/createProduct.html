@@ -1,0 +1,46 @@
+<%- include('_header.html') %>
+
+<div class="container mt-4">
+  <h1>Create a new Product</h1>
+
+  <form method="post">
+    <div class="mb-3">
+      <label for="productName" class="form-label">Product Name</label>
+      <input
+        type="text"
+        class="form-control"
+        name="productName"
+        value="<%= productName %>"
+        id="productName"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="productPrice" class="form-label">Price Product</label>
+      <input
+        type="number"
+        class="form-control"
+        name="productPrice"
+        value="<%= productPrice %>"
+        id="productPrice"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="productTag" class="form-label">Tag Product</label>
+      <input
+        type="text"
+        class="form-control"
+        name="productTag"
+        value="<%= productTag %>"
+        id="productTag"
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+    <% if (errors && errors.length > 0) { %>
+    <div class="alert alert-danger" role="alert"><%= errors %></div>
+    <% } %>
+  </form>
+</div>
+
+<%- include('_footer.html') %>
