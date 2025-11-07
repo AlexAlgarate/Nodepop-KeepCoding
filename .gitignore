@@ -1,4 +1,5 @@
 # Logs
+repomix-output.xml
 logs
 *.log
 npm-debug.log*
