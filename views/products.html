@@ -1,20 +1,46 @@
 <%- include('_header.html') %>
 
 <div class="container mt-4">
+  <% if(products.length === 0) { %>
+  <div class="alert alert-info" role="alert">
+    You don't have any products yet. Create your first product ⤵️
+    <a href="/createProduct">
+      <button class="btn btn-primary btn-lg">Create</button>
+    </a>
+  </div>
+  <% } else { %>
   <h2>Products</h2>
-  <div class="row row-cols-3" >
+  <div class="row row-cols-3">
     <% for (let i = 0; i < products.length; i++) { %>
     <div class="col mb-4">
       <div class="card h-100">
         <div class="card-body">
-          <div class="product-info"># <%= i + 1 %></div>
-          <div class="product-info"><%= products[i].name %></div>
-          <div class="product-price"><%= products[i].price %>€</div>
-          <div class="product-tag"><%= products[i].productTag %></div>
-          <button class="btn btn-danger remove-product">Remove item</button>
+          <h5 class="card-title"># <%= products[i].name %></h5>
+          <hr />
+          <div class="card-text mb-2">
+            <strong>Price:</strong>
+            <span class="text-success fw-bold"><%= products[i].price %> €</span>
+          </div>
+          <div class="card-text mb-3">
+            <strong>Categories</strong><br />
+            <% if(products[i].productTag && products[i].productTag.length > 0) { %> <%
+            products[i].productTag.forEach(function(tag) { %>
+            <span class="badge bg-secondary me-1"><%= tag %></span>
+            <% }); %> <% } else { %>
+            <span class="text-muted">No categories</span>
+            <% } %>
+          </div>
+          <form
+            action="/products/delete/<%= products[i]._id %>"
+            method="post"
+            class="d-inline"
+          >
+            <button class="btn btn-danger remove-product">Remove item</button>
+          </form>
         </div>
       </div>
     </div>
     <% } %>
   </div>
+  <% } %>
 </div>

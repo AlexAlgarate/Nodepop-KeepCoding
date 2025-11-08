@@ -148,3 +148,11 @@ h2 {
   flex-direction: column;
   margin: 1rem;
 }
+
+.alert-info{
+  display: flex;
+  flex-direction: column;
+  gap:16px;
+  justify-content: center;
+  align-items: center;
+}

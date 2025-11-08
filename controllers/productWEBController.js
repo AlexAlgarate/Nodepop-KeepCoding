@@ -13,9 +13,6 @@ export const productController = {
       });
 
       res.render('products.html', {
-        title: 'Practica de NODE',
-        message: "We're Coming Soon...",
-        userId,
         products: products,
       });
     } catch (error) {
@@ -59,6 +56,23 @@ export const productController = {
       if (error.code && error.code === 11000) {
         next(error);
       }
+    }
+  },
+  removeProduct: async (req, res, next) => {
+    try {
+      const { id } = req.params;
+
+      const product = await Product.findById(id);
+
+      if (!product) {
+        return next();
+      }
+
+      await Product.findByIdAndDelete(id);
+
+      res.redirect('/products');
+    } catch (error) {
+      res.redirect('/products');
     }
   },
 };
