@@ -10,7 +10,100 @@
   </div>
   <% } else { %>
   <h2>Products</h2>
-  <div class="row row-cols-3">
+  <div class="card w-100 p-3 bg-primary">
+    <div class="card-body">
+      <form method="GET" action="/products" class="mb-4">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label for="name" class="form-label">Product Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="name"
+              placeholder="Starts with..."
+              value="<%= query.name || '' %>"
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="tag" class="form-label">Tag</label>
+            <input
+              type="text"
+              class="form-control"
+              id="tag"
+              name="tag"
+              placeholder="lifestyle, work, etc."
+              value="<%= query.tag || '' %>"
+            />
+          </div>
+          <div class="col-md-2">
+            <label for="priceMin" class="form-label">Min Price</label>
+            <input
+              type="number"
+              class="form-control"
+              id="priceMin"
+              name="priceMin"
+              placeholder="€"
+              value="<%= query.priceMin || '' %>"
+            />
+          </div>
+          <div class="col-md-2">
+            <label for="priceMax" class="form-label">Max Price</label>
+            <input
+              type="number"
+              class="form-control"
+              id="priceMax"
+              name="priceMax"
+              placeholder="€"
+              value="<%= query.priceMax || '' %>"
+            />
+          </div>
+        </div>
+        <div class="row g-3 mt-2">
+          <div class="col-md-2">
+            <label for="skip" class="form-label">Skip</label>
+            <input
+              type="number"
+              class="form-control"
+              id="skip"
+              name="skip"
+              placeholder="0"
+              value="<%= query.skip || '' %>"
+            />
+          </div>
+          <div class="col-md-2">
+            <label for="limit" class="form-label">Limit</label>
+            <input
+              type="number"
+              class="form-control"
+              id="limit"
+              name="limit"
+              placeholder="10"
+              value="<%= query.limit || '' %>"
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="sort" class="form-label">Sort by</label>
+            <select id="sort" name="sort" class="form-select">
+              <% if (query.sort === 'name') { %>
+              <option value="name" selected>Name</option>
+              <% } else { %>
+              <option value="name">Name</option>
+              <% } %> <% if (query.sort === 'price') { %>
+              <option value="price" selected>Price</option>
+              <% } else { %>
+              <option value="price">Price</option>
+              <% } %>
+            </select>
+          </div>
+          <div class="col-md-4 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary w-100">Filter</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row row-cols-3 bg-primary">
     <% for (let i = 0; i < products.length; i++) { %>
     <div class="col mb-4">
       <div class="card h-100">

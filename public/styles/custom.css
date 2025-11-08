@@ -156,3 +156,7 @@ h2 {
   justify-content: center;
   align-items: center;
 }
+
+.form-label{
+  font-size: 20px;
+}
