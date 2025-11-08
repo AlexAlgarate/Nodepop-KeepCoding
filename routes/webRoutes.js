@@ -1,5 +1,5 @@
 import express from 'express';
-import { Product } from '../models/Product.js';
+
 import { guard } from '../lib/middleware/authMiddleware.js';
 import { loginController } from '../controllers/loginController.js';
 import { productController } from '../controllers/productWEBController.js';
