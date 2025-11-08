@@ -8,12 +8,47 @@ export const productController = {
     try {
       const userId = req.session.userId;
 
-      const products = await Product.find({
-        owner: userId,
-      });
+      const { tag, priceMin, priceMax, name, skip, limit, sort } = req.query;
 
+      const filter = { owner: userId };
+
+      if (tag) {
+        filter.productTag = tag;
+      }
+
+      if (priceMin || priceMax) {
+        filter.price = {};
+        if (priceMin) {
+          filter.price.$gte = priceMin;
+        }
+        if (priceMax) {
+          filter.price.$lte = priceMax;
+        }
+      }
+
+      if (name) {
+        filter.name = new RegExp('^' + name, 'i');
+      }
+
+      const productsQuery = Product.find(filter);
+      if (skip) {
+        productsQuery.skip(parseInt(skip));
+      }
+      if (limit) {
+        productsQuery.limit(parseInt(limit));
+      }
+
+      if (sort) {
+        productsQuery.sort(sort);
+      }
+
+      
+      const products = await productsQuery.exec();
+      
+      
       res.render('products.html', {
         products: products,
+        query: req.query
       });
     } catch (error) {
       next(error);
