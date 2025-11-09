@@ -28,7 +28,10 @@ Nodepop es una aplicación web moderna desarrollada con Node.js que permite la g
 
    ```bash
    cp .env.example .env
-   # Editar el archivo .env con tus configuraciones
+    MONGO_URI= url de tu mongodb
+    PORT= puerto de tu elección
+    NODE_ENV= production/development
+    SESSION_SECRET= secret_key del middleware de la session
    ```
 
 1. Inicializar la base de datos (opcional):
@@ -57,7 +60,7 @@ Nodepop es una aplicación web moderna desarrollada con Node.js que permite la g
 │   ├── Product.js
 │   └── User.js
 ├── package.json            # Archivo de configuración de npm
-├── Practica KCWB19.pdf     # Documento de la práctica
+├── Practica KCWB19.pdf     # Enunciado de la práctica
 ├── README.md
 ├── routes                  # Rutas de la aplicación
 │   ├── apiRoutes.js
@@ -126,11 +129,3 @@ npm run initDB
 - Express.js
 - Mongoose
 - Express-validator
-
-## Contribución
-
-1. Fork del repositorio
-2. Crear una rama para tu funcionalidad (`git checkout -b feature/AmazingFeature`)
-3. Commit de tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abrir un Pull Request
