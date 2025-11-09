@@ -11,9 +11,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="/styles/custom.css" rel="stylesheet" />
   </head>
-  <body style="margin-top: 2rem;">
-  <% if( env !== 'production') %>
-  <%- include('_environment.html') %>
+  <body <% if (env !== 'production') { %> style="margin-top: 2rem;" <% } %>>
+  <% if (env !== 'production') { %>
+    <%- include('_environment.html') %>
+  <% } %>
+
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
