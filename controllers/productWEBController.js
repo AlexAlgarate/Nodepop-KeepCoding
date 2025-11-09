@@ -42,13 +42,11 @@ export const productController = {
         productsQuery.sort(sort);
       }
 
-      
       const products = await productsQuery.exec();
-      
-      
+
       res.render('products.html', {
         products: products,
-        query: req.query
+        query: req.query,
       });
     } catch (error) {
       next(error);
@@ -99,7 +97,13 @@ export const productController = {
 
       const product = await Product.findById(id);
 
+      // If product doesn't exist -> next()
       if (!product) {
+        return next();
+      }
+
+      // Check if owner === userId. If not, next()
+      if (product.owner.toString() !== req.session.userId) {
         return next();
       }
 
