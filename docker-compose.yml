@@ -1,0 +1,11 @@
+services:
+  nodepop-app:
+    build: .
+    container_name: nodepop_server
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+    ports:
+      - '4001:4001'
