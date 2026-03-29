@@ -96,7 +96,6 @@ Nodepop es una aplicación web moderna desarrollada con Node.js que permite la g
 #### Productos
 
 - `GET /api/products`: Obtener lista de productos
-
   - Parámetros de filtrado:
     - `name`: Filtrar por nombre
     - `tag`: Filtrar por etiqueta
@@ -129,3 +128,11 @@ npm run initDB
 - Express.js
 - Mongoose
 - Express-validator
+
+## Despliegue en servidor web (resolución práctica despliegue servidores web)
+
+La aplicación está desplegada en AWS como parte de la solución a la práctica del módulo de despliegue en servidores web. Se puede visitar el despliegue en producción de la app [aquí](https://nodepop.kcpractica.duckdns.org)
+Como parte de la solución, también está disponible el ejercicio dos, cuyo objetivo era desplegar una aplicación de React/Next.js en un servidor web. El proyecto se llama [Bicipop](https://bicipop.kcpractica.duckdns.org) y es un marketplace de compraventa de bicicletas de segunda mano.
+
+Para el despliegue de ambos proyectos se ha empleado el servicio de instancias EC2 de AWS, con un dominio de duckdns.org. No se ha empleado ni PM2 ni Supervisor para mantener la app viva, si no que se han dockerizado ambas soluciones. Nginx es usado como proxy inverso para recibir las peticiones HTTP.
+Además, los archivos estáticos de este proyecto, Nodepop, tienen la cabecera personaliza X-Owner github/AlexAlgarate para demostrar que son servidos por nginx.
